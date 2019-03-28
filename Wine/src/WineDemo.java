@@ -45,33 +45,33 @@ class WineDemo implements ActionListener
   {  
    JFrame jfrm;
    
-   DefaultTableModel wineList;
+   DefaultTableModel carList;
   
-   JComboBox preferredcarvillage; 
-   JComboBox preferrecarcity; 
-   JComboBox preferredcarmix; 
+   JComboBox preferredType; 
+   JComboBox preferredRoad; 
+   JComboBox preferredDrive; 
 
-   JComboBox mainCourse; 
-   JComboBox sauce; 
-   JComboBox flavor; 
+   JComboBox mainMark; 
+   JComboBox tuning; 
+   JComboBox fuel; 
    
    JLabel jlab; 
 
-   String preferredCarvillageNames[] = { "Don't Care", "hatchback", "USF" }; 
-   String preferredCarcityNames[] = { "Don't Care", "Light", "Medium", "Full" }; 
-   String preferredCarmixNames[] = { "Don't Care", "none", "Medium", "mixed" }; 
+   String preferredTypeNames[] = { "Don't Care", "Hatcback", "USF" }; 
+   String preferredRoadNames[] = { "Don't Care", "OFFROAD", "HIGHWAY", "TRACK" }; 
+   String preferredDriveNames[] = { "Don't Care", "4wd", "rwd", "fwd" }; 
    
-   String mainCourseNames[] = { "Don't Know", "Beef", "Pork", "Lamb", "Turkey", "Chicken", "Duck", "Fish", "Other" };
-   String sauceNames[] = { "Don't Know", "None", "Spicy", "Sweet", "Cream", "Other" };
-   String flavorNames[] = { "Don't Know", "Delicate", "Average", "Strong" };
+   String mainMarkNames[] = { "Don't Know", "MERSEDES", "BMW", "WALKSWAGEN", "MANSORY",  "Other" };
+   String tuningNames[] = { "Don't Know", "None", "AMG", "BRABUS", "GARAGE", "Other" };
+   String fuelNames[] = { "Don't Know", "GAS", "BENZINE", "DIZEL" };
  
-   String preferredCarvilageChoices[] = new String[3]; 
-   String preferredCarcityChoices[] = new String[4]; 
-   String preferredCarmixChoices[] = new String[4]; 
+   String preferredTypeChoices[] = new String[3]; 
+   String preferredRoadChoices[] = new String[4]; 
+   String preferredDriveChoices[] = new String[4]; 
    
-   String mainCourseChoices[] = new String[9];
-   String sauceChoices[] = new String[6];
-   String flavorChoices[] = new String[4];
+   String mainMarkChoices[] = new String[9];
+   String tuningChoices[] = new String[6];
+   String fuelChoices[] = new String[4];
 
    ResourceBundle wineResources;
 
@@ -80,7 +80,9 @@ class WineDemo implements ActionListener
    boolean isExecuting = false;
    Thread executionThread;
 
-   class WeightCellRenderer extends JProgressBar implements TableCellRenderer 
+
+
+class WeightCellRenderer extends JProgressBar implements TableCellRenderer 
      {
       public WeightCellRenderer() 
         {
@@ -116,41 +118,41 @@ class WineDemo implements ActionListener
          return;
         }
 
-      preferredCarvilageChoices[0] = wineResources.getString("Don'tCare"); 
-      preferredCarvilageChoices[1] = wineResources.getString("hatchback"); 
-      preferredCarvilageChoices[2] = wineResources.getString("USF"); 
+      preferredTypeChoices[0] = wineResources.getString("Don'tCare"); 
+      preferredTypeChoices[1] = wineResources.getString("Hatcback"); 
+      preferredTypeChoices[2] = wineResources.getString("USF"); 
       
-      preferredCarcityChoices[0] = wineResources.getString("Don'tCare"); 
-      preferredCarcityChoices[1] = wineResources.getString("Light"); 
-      preferredCarcityChoices[2] = wineResources.getString("MediumBody"); 
-      preferredCarcityChoices[3] = wineResources.getString("Full"); 
+      preferredRoadChoices[0] = wineResources.getString("Don'tCare"); 
+      preferredRoadChoices[1] = wineResources.getString("OFFROAD"); 
+      preferredRoadChoices[2] = wineResources.getString("HIGHWAY"); 
+      preferredRoadChoices[3] = wineResources.getString("TRACK"); 
 
-      preferredCarmixChoices[0] = wineResources.getString("Don'tCare"); 
-      preferredCarmixChoices[1] = wineResources.getString("None"); 
-      preferredCarmixChoices[2] = wineResources.getString("MediumSweetness"); 
-      preferredCarmixChoices[3] = wineResources.getString("mix"); 
+      preferredDriveChoices[0] = wineResources.getString("Don'tCare"); 
+      preferredDriveChoices[1] = wineResources.getString("4wd"); 
+      preferredDriveChoices[2] = wineResources.getString("rwd"); 
+      preferredDriveChoices[3] = wineResources.getString("fwd"); 
       
-      mainCourseChoices[0] = wineResources.getString("Don'tKnow"); 
-      mainCourseChoices[1] = wineResources.getString("Beef"); 
-      mainCourseChoices[2] = wineResources.getString("Pork"); 
-      mainCourseChoices[3] = wineResources.getString("Lamb"); 
-      mainCourseChoices[4] = wineResources.getString("Turkey"); 
-      mainCourseChoices[5] = wineResources.getString("Chicken"); 
-      mainCourseChoices[6] = wineResources.getString("Duck"); 
-      mainCourseChoices[7] = wineResources.getString("Fish"); 
-      mainCourseChoices[8] = wineResources.getString("Other"); 
-   
-      sauceChoices[0] = wineResources.getString("Don'tKnow"); 
-      sauceChoices[1] = wineResources.getString("None"); 
-      sauceChoices[2] = wineResources.getString("Spicy"); 
-      sauceChoices[3] = wineResources.getString("Sweet"); 
-      sauceChoices[4] = wineResources.getString("Cream"); 
-      sauceChoices[5] = wineResources.getString("Other"); 
+      mainMarkChoices[0] = wineResources.getString("Don'tKnow"); 
+      mainMarkChoices[1] = wineResources.getString("MERSEDES"); 
+      mainMarkChoices[2] = wineResources.getString("MANSORY"); 
+      mainMarkChoices[3] = wineResources.getString("BMW"); 
+      mainMarkChoices[4] = wineResources.getString("WALKSWAGEN"); 
+      mainMarkChoices[6] = wineResources.getString("WALKSWAGEN");
+      mainMarkChoices[7] = wineResources.getString("WALKSWAGEN");
+      mainMarkChoices[8] = wineResources.getString("WALKSWAGEN");
+      mainMarkChoices[5] = wineResources.getString("Other"); 
+      
+      tuningChoices[0] = wineResources.getString("Don'tKnow"); 
+      tuningChoices[1] = wineResources.getString("None"); 
+      tuningChoices[2] = wineResources.getString("BRABUS"); 
+      tuningChoices[3] = wineResources.getString("AMG"); 
+      tuningChoices[4] = wineResources.getString("GARAGE"); 
+      tuningChoices[5] = wineResources.getString("Other"); 
 
-      flavorChoices[0] = wineResources.getString("Don'tKnow"); 
-      flavorChoices[1] = wineResources.getString("Delicate"); 
-      flavorChoices[2] = wineResources.getString("Average"); 
-      flavorChoices[3] = wineResources.getString("Strong"); 
+      fuelChoices[0] = wineResources.getString("Don'tKnow"); 
+      fuelChoices[1] = wineResources.getString("GAS"); 
+      fuelChoices[2] = wineResources.getString("BENZINE"); 
+      fuelChoices[3] = wineResources.getString("DIZEL"); 
 
       /*===================================*/
       /* Create a new JFrame container and */
@@ -184,20 +186,20 @@ class WineDemo implements ActionListener
                                                                  TitledBorder.CENTER,
                                                                  TitledBorder.ABOVE_TOP));
  
-      preferencesPanel.add(new JLabel(wineResources.getString("ColorLabel")));
-      preferredcarvillage = new JComboBox(preferredCarvilageChoices); 
-      preferencesPanel.add(preferredcarvillage);
-      preferredcarvillage.addActionListener(this);
+      preferencesPanel.add(new JLabel(wineResources.getString("TypeLabel")));
+      preferredType = new JComboBox(preferredTypeChoices); 
+      preferencesPanel.add(preferredType);
+      preferredType.addActionListener(this);
      
-      preferencesPanel.add(new JLabel(wineResources.getString("BodyLabel")));
-      preferrecarcity = new JComboBox(preferredCarcityChoices); 
-      preferencesPanel.add(preferrecarcity);
-      preferrecarcity.addActionListener(this);
+      preferencesPanel.add(new JLabel(wineResources.getString("RoadLabel")));
+      preferredRoad = new JComboBox(preferredRoadChoices); 
+      preferencesPanel.add(preferredRoad);
+      preferredRoad.addActionListener(this);
 
-      preferencesPanel.add(new JLabel(wineResources.getString("SweetnessLabel")));
-      preferredcarmix = new JComboBox(preferredCarmixChoices); 
-      preferencesPanel.add(preferredcarmix);
-      preferredcarmix.addActionListener(this);
+      preferencesPanel.add(new JLabel(wineResources.getString("DriveLabel")));
+      preferredDrive = new JComboBox(preferredDriveChoices); 
+      preferencesPanel.add(preferredDrive);
+      preferredDrive.addActionListener(this);
 
       /*========================*/
       /* Create the meal panel. */
@@ -211,20 +213,20 @@ class WineDemo implements ActionListener
                                                                  TitledBorder.CENTER,
                                                                  TitledBorder.ABOVE_TOP));
  
-      mealPanel.add(new JLabel(wineResources.getString("MainCourseLabel")));
-      mainCourse = new JComboBox(mainCourseChoices); 
-      mealPanel.add(mainCourse);
-      mainCourse.addActionListener(this);
+      mealPanel.add(new JLabel(wineResources.getString("MainMarkLabel")));
+      mainMark = new JComboBox(mainMarkChoices); 
+      mealPanel.add(mainMark);
+      mainMark.addActionListener(this);
     
-      mealPanel.add(new JLabel(wineResources.getString("SauceLabel")));
-      sauce = new JComboBox(sauceChoices); 
-      mealPanel.add(sauce);
-      sauce.addActionListener(this);
+      mealPanel.add(new JLabel(wineResources.getString("TuningLabel")));
+      tuning = new JComboBox(tuningChoices); 
+      mealPanel.add(tuning);
+      tuning.addActionListener(this);
 
-      mealPanel.add(new JLabel(wineResources.getString("FlavorLabel")));
-      flavor = new JComboBox(flavorChoices); 
-      mealPanel.add(flavor);
-      flavor.addActionListener(this);
+      mealPanel.add(new JLabel(wineResources.getString("FuelLabel")));
+      fuel = new JComboBox(fuelChoices); 
+      mealPanel.add(fuel);
+      fuel.addActionListener(this);
       
       /*==============================================*/
       /* Create a panel including the preferences and */
@@ -242,14 +244,14 @@ class WineDemo implements ActionListener
       /* Create the recommendation panel. */
       /*==================================*/
 
-      wineList = new DefaultTableModel();
+      carList = new DefaultTableModel();
 
-      wineList.setDataVector(new Object[][] { },
-                             new Object[] { wineResources.getString("WineTitle"), 
+      carList.setDataVector(new Object[][] { },
+                             new Object[] { wineResources.getString("CarTitle"), 
                                             wineResources.getString("RecommendationTitle")});
          
       JTable table = 
-         new JTable(wineList)
+         new JTable(carList)
            {
             public boolean isCellEditable(int rowIndex,int vColIndex) 
               { return false; }
@@ -276,12 +278,12 @@ class WineDemo implements ActionListener
       /* Initially select the first item in each ComboBox. */
       /*===================================================*/
        
-      preferredcarvillage.setSelectedIndex(0); 
-      preferrecarcity.setSelectedIndex(0); 
-      preferredcarmix.setSelectedIndex(0); 
-      mainCourse.setSelectedIndex(0);
-      sauce.setSelectedIndex(0);
-      flavor.setSelectedIndex(0);
+      preferredType.setSelectedIndex(0); 
+      preferredRoad.setSelectedIndex(0); 
+      preferredDrive.setSelectedIndex(0); 
+      mainMark.setSelectedIndex(0);
+      tuning.setSelectedIndex(0);
+      fuel.setSelectedIndex(0);
 
       /*========================*/
       /* Load the wine program. */
@@ -333,106 +335,106 @@ class WineDemo implements ActionListener
       
       clips.reset();      
             
-      item = preferredCarvillageNames[preferredcarvillage.getSelectedIndex()];
+      item = preferredTypeChoices[preferredType.getSelectedIndex()];
       
-      if (item.equals("car_h"))   
-        { clips.assertString("(attribute (name preferred-car_vilage) (value hatchback))"); }
-      else if (item.equals(""))   
-        { clips.assertString("(attribute (name preferred-car_vilage) (value USF))"); }
+      if (item.equals("hatcback"))   
+        { clips.assertString("(attribute (name  preferred-type) (value hatcback))"); }
+      else if (item.equals("usf"))   
+        { clips.assertString("(attribute (name  preferred-type) (value usf))"); }
       else
-        { clips.assertString("(attribute (name preferred-car_vilage) (value unknown))"); }
+        { clips.assertString("(attribute (name  preferred-type) (value unknown))"); }
 
-      item = preferredCarcityNames[preferrecarcity.getSelectedIndex()];
-      if (item.equals("Light"))   
-        { clips.assertString("(attribute (name preferred-body) (value light))"); }
-      else if (item.equals("Medium"))   
-        { clips.assertString("(attribute (name preferred-body) (value medium))"); }
-      else if (item.equals("Full"))   
-        { clips.assertString("(attribute (name preferred-body) (value full))"); }
+      item = preferredRoadChoices[preferredRoad.getSelectedIndex()];
+      if (item.equals("offroad"))   
+        { clips.assertString("(attribute (name preferred-road) (value offroad))"); }
+      else if (item.equals("highway"))   
+        { clips.assertString("(attribute (name preferred-road) (value highway))"); }
+      else if (item.equals("track"))   
+        { clips.assertString("(attribute (name preferred-road) (value track))"); }
       else
-        { clips.assertString("(attribute (name preferred-body) (value unknown))"); }
+        { clips.assertString("(attribute (name preferred-road) (value unknown))"); }
  
-      item = preferredCarmixNames[preferredcarmix.getSelectedIndex()];
-      if (item.equals("Dry"))   
-        { clips.assertString("(attribute (name preferred-sweetness) (value none))"); }
-      else if (item.equals("Medium"))   
-        { clips.assertString("(attribute (name preferred-sweetness) (value medium))"); }
-      else if (item.equals("Sweet"))   
-        { clips.assertString("(attribute (name preferred-sweetness) (value mix))"); }
+      item = preferredDriveChoices[preferredDrive.getSelectedIndex()];
+      if (item.equals("4wd"))   
+        { clips.assertString("(attribute (name preferred-drive) (value 4wd))"); }
+      else if (item.equals("rwd"))   
+        { clips.assertString("(attribute (name preferred-drive) (value rwd))"); }
+      else if (item.equals("fwd"))   
+        { clips.assertString("(attribute (name preferred-drive) (value fwd))"); }
       else
-        { clips.assertString("(attribute (name preferred-sweetness) (value unknown))"); }
+        { clips.assertString("(attribute (name preferred-drive) (value unknown))"); }
 
-      item = mainCourseNames[mainCourse.getSelectedIndex()];
-      if (item.equals("Beef") ||
-          item.equals("Pork") ||
-          item.equals("Lamb"))
+      item = mainMarkChoices[mainMark.getSelectedIndex()];
+      if (item.equals("MERSEDES") ||
+          item.equals("BMW") ||
+          item.equals("WALKSWAGEN"))
         { 
-         clips.assertString("(attribute (name main-component) (value meat))"); 
-         clips.assertString("(attribute (name has-turkey) (value no))");
+         clips.assertString("(attribute (name main-mark) (value walkswagen))"); 
+         clips.assertString("(attribute (name has-mansory) (value no))");
         }
-      else if (item.equals("Turkey"))   
+      else if (item.equals("MANSORY"))   
         { 
-         clips.assertString("(attribute (name main-component) (value poultry))"); 
-         clips.assertString("(attribute (name has-turkey) (value yes))");
+         clips.assertString("(attribute (name main-mark) (value mersedes))"); 
+         clips.assertString("(attribute (name has-mansory) (value yes))");
         }
-      else if (item.equals("Chicken") ||
-               item.equals("Duck"))   
+      else if (item.equals("hatchback") ||
+               item.equals("usf"))   
         { 
-         clips.assertString("(attribute (name main-component) (value poultry))"); 
-         clips.assertString("(attribute (name has-turkey) (value no))");
+         clips.assertString("(attribute (name main-mark) (value mersedes))"); 
+         clips.assertString("(attribute (name has-mansory) (value no))");
         }
-      else if (item.equals("Fish"))   
+      else if (item.equals("BMW"))   
         { 
-         clips.assertString("(attribute (name main-component) (value fish))"); 
-         clips.assertString("(attribute (name has-turkey) (value no))");
+         clips.assertString("(attribute (name main-mark) (value bmw))"); 
+         clips.assertString("(attribute (name has-mansory) (value no))");
         }
       else if (item.equals("Other"))   
         { 
-         clips.assertString("(attribute (name main-component) (value unknown))"); 
-         clips.assertString("(attribute (name has-turkey) (value no))");
+         clips.assertString("(attribute (name main-mark) (value unknown))"); 
+         clips.assertString("(attribute (name has-mansory) (value no))");
         }
       else
         { 
-         clips.assertString("(attribute (name main-component) (value unknown))"); 
-         clips.assertString("(attribute (name has-turkey) (value unknown))");
+         clips.assertString("(attribute (name main-mark) (value unknown))"); 
+         clips.assertString("(attribute (name has-mansory) (value unknown))");
         }
 
-      item = sauceNames[sauce.getSelectedIndex()];
+      item = tuningChoices[tuning.getSelectedIndex()];
       if (item.equals("None"))   
-        { clips.assertString("(attribute (name has-sauce) (value no))"); }
-      else if (item.equals("Spicy"))   
+        { clips.assertString("(attribute (name has-tuning) (value no))"); }
+      else if (item.equals("BRABUS"))   
         { 
-         clips.assertString("(attribute (name has-sauce) (value yes))");
-         clips.assertString("(attribute (name sauce) (value spicy))");
+         clips.assertString("(attribute (name has-tuning) (value yes))");
+         clips.assertString("(attribute (name tuning) (value brabus))");
         }
-      else if (item.equals("Sweet"))   
+      else if (item.equals("GARAGE"))   
         { 
-         clips.assertString("(attribute (name has-sauce) (value yes))");
-         clips.assertString("(attribute (name sauce) (value sweet))");
+         clips.assertString("(attribute (name has-tuning) (value yes))");
+         clips.assertString("(attribute (name tuning) (value garage))");
         }
-      else if (item.equals("Cream"))   
+      else if (item.equals("AMG"))   
         { 
-         clips.assertString("(attribute (name has-sauce) (value yes))");
-         clips.assertString("(attribute (name sauce) (value cream))");
+         clips.assertString("(attribute (name has-tuning) (value yes))");
+         clips.assertString("(attribute (name tuning) (value AMG))");
         }
       else if (item.equals("Other"))   
         { 
-         clips.assertString("(attribute (name has-sauce) (value yes))");
-         clips.assertString("(attribute (name sauce) (value unknown))");
+         clips.assertString("(attribute (name has-tuning) (value yes))");
+         clips.assertString("(attribute (name tuning) (value unknown))");
         }
       else
         { 
-         clips.assertString("(attribute (name has-sauce) (value unknown))");
-         clips.assertString("(attribute (name sauce) (value unknown))");
+         clips.assertString("(attribute (name has-tuning) (value unknown))");
+         clips.assertString("(attribute (name tuning) (value unknown))");
         }
 
-      item = flavorNames[flavor.getSelectedIndex()];
-      if (item.equals("Delicate"))   
-        { clips.assertString("(attribute (name tastiness) (value delicate))"); }
-      else if (item.equals("Average"))   
-        { clips.assertString("(attribute (name tastiness) (value average))"); }
-      else if (item.equals("Strong"))   
-        { clips.assertString("(attribute (name tastiness) (value strong))"); }
+      item = fuelNames[fuel.getSelectedIndex()];
+      if (item.equals("GAS"))   
+        { clips.assertString("(attribute (name tastiness) (value gas))"); }
+      else if (item.equals("BENZINE"))   
+        { clips.assertString("(attribute (name tastiness) (value benzine))"); }
+      else if (item.equals("DIZEL"))   
+        { clips.assertString("(attribute (name tastiness) (value dizel))"); }
       else
         { clips.assertString("(attribute (name tastiness) (value unknown))"); }
       
@@ -469,11 +471,11 @@ class WineDemo implements ActionListener
    /***************/  
    private void updateCars() throws Exception
      { 
-      String evalStr = "(CARS::get-cars-list)";
+      String evalStr = "(CARS::get-car-list)";
                                        
       PrimitiveValue pv = clips.eval(evalStr);
                
-      wineList.setRowCount(0);
+      carList.setRowCount(0);
       
       for (int i = 0; i < pv.size(); i++) 
         {
@@ -483,7 +485,7 @@ class WineDemo implements ActionListener
          
          String carName = fv.getFactSlot("value").stringValue();
                   
-         wineList.addRow(new Object[] { carName, new Integer(certainty) });
+         carList.addRow(new Object[] { carName, new Integer(certainty) });
         }  
         
       jfrm.pack();

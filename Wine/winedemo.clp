@@ -1,9 +1,9 @@
 
 ;;;======================================================
-;;;   Wine Expert Sample Problem
+;;;   car Expert Sample Problem
 ;;;
-;;;     WINEX: The WINe EXpert system.
-;;;     This example selects an appropriate wine
+;;;     carX: The car EXpert system.
+;;;     This example selects an appropriate car
 ;;;     to drink with a meal.
 ;;;
 ;;;     CLIPS Version 6.3 Example
@@ -26,7 +26,7 @@
   (declare (salience 10000))
   =>
   (set-fact-duplication TRUE)
-  (focus CHOOSE-QUALITIES WINES))
+  (focus CHOOSE-QUALITIES CARS))
 
 (defrule MAIN::combine-certainties ""
   (declare (salience 100)
@@ -105,120 +105,118 @@
 
 (defrule CHOOSE-QUALITIES::startit => (focus RULES))
 
-(deffacts the-cars-rules
+(deffacts the-car-rules
 
-  ; Rules for picking the best car_city
+  ; Rules for picking the best road
 
-  (rule (if has-sauce is yes and 
-            sauce is spicy)
-        (then best-car_city is full))
+  (rule (if has-tuning is yes and 
+            tuning is amg)
+        (then best-road is track))
 
-  (rule (if tastiness is delicate)
-        (then best-car_city is car_light))
+  (rule (if fuel is gas)
+        (then best-road is offroad))
 
-  (rule (if tastiness is average)
-        (then best-car_city is car_light with certainty 30 and
-              best-car_city is car_medium with certainty 60 and
-              best-car_city is full with certainty 30))
+  (rule (if fuel is dizel)
+        (then best-road is offroad with certainty 30 and
+              best-road is highway with certainty 60 and
+              best-road is track with certainty 30))
 
-  (rule (if tastiness is strong)
-        (then best-car_city is car_medium with certainty 40 and
-              best-car_city is full with certainty 80))
+  (rule (if fuel is benzine)
+        (then best-road is highway with certainty 40 and
+              best-road is track with certainty 80))
 
-  (rule (if has-sauce is yes and
-            sauce is cream)
-        (then best-car_city is car_medium with certainty 40 and
-              best-car_city is full with certainty 60))
+  (rule (if has-tuning is yes and
+            tuning is brabus)
+        (then best-road is highway with certainty 40 and
+              best-broad is track with certainty 60))
 
-  (rule (if preferred-car is full)
-        (then best-car_city is full with certainty 40))
+  (rule (if preferred-road is track)
+        (then best-road is track with certainty 40))
 
-  (rule (if preferred-car is car_medium)
-        (then best-car_city is car_medium with certainty 40))
+  (rule (if preferred-road is highway)
+        (then best-road is highway with certainty 40))
 
-  (rule (if preferred-car is car_light) 
-        (then best-car_city is car_light with certainty 40))
+  (rule (if preferred-road is offroad) 
+        (then best-road is offroad with certainty 40))
 
-  (rule (if preferred-car is car_light and
-            best-car_city is full)
-        (then best-car_city is car_medium))
+  (rule (if preferred-road is offroad and
+            best-road is track)
+        (then best-road is highway))
 
-  (rule (if preferred-body is full and
-            best-car_city is car_light)
-        (then best-car_city is car_medium))
+  (rule (if preferred-road is track and
+            best-road is offroad)
+        (then best-road is highway))
 
-  (rule (if preferred-car is unknown) 
-        (then best-car_city is car_light with certainty 20 and
-              best-car_city is car_medium with certainty 20 and
-              best-car_city is full with certainty 20))
+  (rule (if preferred-road is unknown) 
+        (then best-road is offroad with certainty 20 and
+              best-road is highway with certainty 20 and
+              best-road is track with certainty 20))
 
-  ; Rules for picking the best car village
+  ; Rules for picking the best type
 
-  (rule (if main-component is meat)
-        (then best-car_village is  with certainty 90))
+  (rule (if main-mark is walkswagen)
+        (then best-type is hatcback with certainty 90))
 
-  (rule (if main-component is poultry and
-            has-turkey is no)
-        (then best-car_village is car_u with certainty 90 and
-              best-car_village is car_h with certainty 30))
+  (rule (if main-mark is mersedes and
+            has-mansory is no)
+        (then best-type is usf with certainty 90 and
+              best-type is hatcback with certainty 30))
 
-  (rule (if main-component is poultry and
-            has-turkey is yes)
-        (then best-car_village is car_h with certainty 80 and
-              best-car_village is car_u with certainty 50))
+  (rule (if main-component is mersedes and
+            has-mansory is yes)
+        (then best-type is hatcback with certainty 80 and
+              best-type is usf with certainty 50))
 
-  (rule (if main-component is fish)
-        (then best-car_village is car_u))
+  (rule (if main-mark is bmw)
+        (then best-type is usf))
 
-  (rule (if main-component is-not fish and
-            has-sauce is yes and
-            sauce is tomato)
-        (then best-car_village is car_h))
+  (rule (if main-mark is-not usf and
+            has-tuning is yes and
+            tuning is garage)
+        (then best-type is hatcback))
 
-  (rule (if has-sauce is yes and
-            sauce is cream)
-        (then best-car_village is car_u with certainty 40))
+  (rule (if has-tuning is yes and
+            tuning is brabus)
+        (then best-type is usf with certainty 40))
                    
-  (rule (if preferred-car is car_h)
-        (then best-car_village is car_h with certainty 40))
+  (rule (if preferred-type is hatcback)
+        (then best-type is hatcback with certainty 40))
 
-  (rule (if preferred-car is car_u)
-        (then best-car_village is car_u with certainty 40))
+  (rule (if preferred-type is usf)
+        (then best-type is usf with certainty 40))
 
-  (rule (if preferred-car is unknown)
-        (then best-car_village is car_h with certainty 20 and
-              best-car_village is car_u with certainty 20))
+  (rule (if preferred-type is unknown)
+        (then best-type is hatcback with certainty 20 and
+              best-type is usf with certainty 20))
   
-  ; Rules for picking the best car_mix
+  ; Rules for picking the best drive
 
-  (rule (if has-sauce is yes and
-            sauce is car_m)
-        (then best-car_mix is car_m with certainty 90 and
-              best-car_mix is car_medium with certainty 40))
+  (rule (if has-tuning is yes and
+            tuning is town)
+        (then best-drive is fwd with certainty 90 and
+              best-drive is rwd with certainty 40))
 
-  (rule (if preferred-car_mix is car_none)
-        (then best-car_mix is car_none with certainty 40))
+  (rule (if preferred-drive is 4wd)
+        (then best-drive is 4wd with certainty 40))
 
-  (rule (if preferred-car_mix is car_medium)
-        (then best-car_mix is car_medium with certainty 40))
+  (rule (if preferred-drive is rwd)
+        (then best-drive is rwd with certainty 40))
 
-  (rule (if preferred-car_mix is car_m)
-        (then best-car_mix is car_m with certainty 40))
+  (rule (if preferred-drive is fwd)
+        (then best-drive is fwd with certainty 40))
 
-  (rule (if best-Car_mix is car_m and
-            preferred-car_mix is car_none)
-        (then best-car_mix is car_medium))
+  (rule (if best-drive is fwd and
+            preferred-drive is 4wd)
+        (then best-drive is rwd))
 
-  (rule (if best-car_mix is car_none and
-            preferred-car_mix is car_m) 
-        (then best-sweetness is car_medium))
+  (rule (if best-drive is 4wd and
+            preferred-drive is fwd) 
+        (then best-drive is rwd))
 
-  (rule (if preferred-car_m is unknown)
-        (then best-car_m is car_none with certainty 20 and
-              best-car_m is car_medium with certainty 20 and
-              best-car_m is car_m with certainty 20))
-
-)
+  (rule (if preferred-drive is unknown)
+        (then best-drive is 4wd with certainty 20 and
+              best-drive is rwd with certainty 20 and
+              best-drive is fwd with certainty 20)))
 
 ;;************************
 ;;* CAR SELECTION RULES *
@@ -228,50 +226,50 @@
                  (export deffunction get-car-list))
 
 (deffacts any-attributes
-  (attribute (name best-car_city) (value any))
-  (attribute (name best-car_village) (value any))
-  (attribute (name best-car_mix) (value any)))
+  (attribute (name best-type) (value any))
+  (attribute (name best-road) (value any))
+  (attribute (name best-drive) (value any)))
 
-(deftemplate CARS::cars
+(deftemplate CARS::car
   (slot name (default ?NONE))
-  (multislot car_city (default any))
-  (multislot car_village (default any))
-  (multislot car_m (default any)))
+  (multislot type (default any))
+  (multislot road (default any))
+  (multislot drive (default any)))
 
-(deffacts CARS::the-cars-list 
-  (car (name "Wolkswagen-golf") (car_city) (car_medium) (car_m medium car_m))
-  (car (name "Wolkswagen-toureg") (car_u) ( car_light) (car_m car_none))
-  (car (name "Pagany") (car_u) ( car_medium) (car_m car_none))
-  (car (name "Maserati") (car_u) (car_medium full) (car_m car_medium car_none))
-  (car(name "Mersedes -gle") (car_u) ( car_light) (car_m car_medium car_none))
-  (car (name "Bugatti") (car_u) (car_light car_medium) (car_m car_medium car_m))
-  (car (name "BMW- m1") (car_u) (car_city full))
-  (car (name "BMW- x6") (car_u) (car_light) (car_m medium car_m))
-  (car (name "Ferrari") (car_h) ( car_light))
-  (car (name "Lanos") (car_h) (sweetness dry medium))
-  (car (name "Mersedes-a180") (car_h) (car_m car_none car_medium))
-  (car (name "Seat") (car_h) (car_city car_medium) (car_m car_medium))
-  (car (name "Fiat") (car_h) (car_city full))
-  (car (name "Mercury") (car_h) (car_m car_none car_medium)))
+(deffacts CARS::the-car-list 
+  (car (name "marka2") (type hatcback) (road highway) (drive medium fwd))
+  (car (name "marka3") (type suf) (road offroad) (drive 4wd))
+  (car (name "x6") (type suf) (road highway) (drive 4wd))
+  (car (name "x3") (type suf) (road highway track) (drive medium 4wd))
+  (car (name "golf") (type suf) (road offroad) (drive medium 4wd))
+  (car (name "marka4") (type suf) (road light medium) (drive rwd fwd))
+  (car (name "marka5") (type suf) (road track))
+  (car (name "marka6") (type suf) (road offroad) (drive rwd fwd))
+  (car (name "marka7") (type hatcback) (road offroad))
+  (car (name "a45") (type hatcback) (drive 4wd rwd))
+  (car (name "lanos") (type hatcback) (drive 4wd medium))
+  (car (name "polo") (type hatcback) (road highway) (drive rwd))
+  (car (name "jigul") (type hatcback) (road track))
+  (car (name "marka1") (type hatcback) (drive 4wd rwd)))
   
   
 (defrule CARS::generate-cars
-  (wine (name ?name)
-        (color $? ?c $?)
-        (body $? ?b $?)
-        (sweetness $? ?s $?))
-  (attribute (name best-car_village) (value ?c) (certainty ?certainty-1))
-  (attribute (name best-car_city) (value ?b) (certainty ?certainty-2))
-  (attribute (name best-car_mix) (value ?s) (certainty ?certainty-3))
+  (car (name ?name)
+        (type $? ?c $?)
+        (road $? ?b $?)
+        (drive $? ?s $?))
+  (attribute (name best-type) (value ?c) (certainty ?certainty-1))
+  (attribute (name best-road) (value ?b) (certainty ?certainty-2))
+  (attribute (name best-drive) (value ?s) (certainty ?certainty-3))
   =>
   (assert (attribute (name car) (value ?name)
                      (certainty (min ?certainty-1 ?certainty-2 ?certainty-3)))))
 
-(deffunction CARS::cars-sort (?w1 ?w2)
+(deffunction CARS::car-sort (?w1 ?w2)
    (< (fact-slot-value ?w1 certainty)
       (fact-slot-value ?w2 certainty)))
       
-(deffunction CARS::get-type-list ()
+(deffunction CARS::get-car-list ()
   (bind ?facts (find-all-facts ((?f attribute))
                                (and (eq ?f:name car)
                                     (>= ?f:certainty 20))))
