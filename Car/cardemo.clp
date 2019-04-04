@@ -170,7 +170,7 @@
   (rule (if main-mark is bmw)
         (then best-type is usf))
 
-  (rule (if main-mark is-not usf and
+  (rule (if main-mark is-not bmw and
             has-tuning is yes and
             tuning is garage)
         (then best-type is hatcback))
@@ -192,7 +192,7 @@
   ; Rules for picking the best drive
 
   (rule (if has-tuning is yes and
-            tuning is town)
+            tuning is garage)
         (then best-drive is fwd with certainty 90 and
               best-drive is rwd with certainty 40))
 
@@ -236,22 +236,24 @@
   (multislot road (default any))
   (multislot drive (default any)))
 
+
+
 (deffacts CARS::the-car-list 
-  (car (name "marka2") (type hatcback) (road highway) (drive medium fwd))
-  (car (name "marka3") (type suf) (road offroad) (drive 4wd))
-  (car (name "x6") (type suf) (road highway) (drive 4wd))
-  (car (name "x3") (type suf) (road highway track) (drive medium 4wd))
-  (car (name "golf") (type suf) (road offroad) (drive medium 4wd))
-  (car (name "marka4") (type suf) (road light medium) (drive rwd fwd))
-  (car (name "marka5") (type suf) (road track))
-  (car (name "marka6") (type suf) (road offroad) (drive rwd fwd))
-  (car (name "marka7") (type hatcback) (road offroad))
+  (car (name "a160") (type hatcback) (road highway) (drive rwd garage))
+  (car (name "gle") (type usf) (road offroad) (drive 4wd))
+  (car (name "x6") (type usf) (road highway) (drive 4wd))
+  (car (name "gla") (type usf) (road highway track) (drive rwd 4wd))
+  (car (name "tourag") (type usf) (road offroad) (drive rwd 4wd))
+  (car (name "gla") (type usf) (road offroad rwd) (drive rwd fwd))
+  (car (name "glc") (type usf) (road track))
+  (car (name "x4") (type usf) (road offroad) (drive rwd fwd))
+  (car (name "q8") (type usf) (road offroad))
+  (car (name "ml") (type usf) (road offroad) (drive 4wd rwd))
   (car (name "a45") (type hatcback) (drive 4wd rwd))
-  (car (name "lanos") (type hatcback) (drive 4wd medium))
   (car (name "polo") (type hatcback) (road highway) (drive rwd))
-  (car (name "jigul") (type hatcback) (road track))
-  (car (name "marka1") (type hatcback) (drive 4wd rwd)))
-  
+  (car (name "a180") (type hatcback) (road track))
+  (car (name "x4") (type hatcback) (drive 4wd rwd)))
+ 
   
 (defrule CARS::generate-cars
   (car (name ?name)

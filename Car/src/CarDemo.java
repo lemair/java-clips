@@ -41,7 +41,7 @@ or makeInstance call, retain it and then release it after the call is made.
 
 */
 
-class WineDemo implements ActionListener
+class CarDemo implements ActionListener
   {  
    JFrame jfrm;
    
@@ -61,7 +61,7 @@ class WineDemo implements ActionListener
    String preferredRoadNames[] = { "Don't Care", "OFFROAD", "HIGHWAY", "TRACK" }; 
    String preferredDriveNames[] = { "Don't Care", "4wd", "rwd", "fwd" }; 
    
-   String mainMarkNames[] = { "Don't Know", "MERSEDES", "BMW", "WALKSWAGEN", "MANSORY",  "Other" };
+   String mainMarkNames[] = { "Don't Know", "WALKSWAGEN", "BUGATTI", "AUDI", "MANSORY", "MERSEDES", "POSEIDON", "BMW",  "Other" };
    String tuningNames[] = { "Don't Know", "None", "AMG", "BRABUS", "GARAGE", "Other" };
    String fuelNames[] = { "Don't Know", "GAS", "BENZINE", "DIZEL" };
  
@@ -73,18 +73,21 @@ class WineDemo implements ActionListener
    String tuningChoices[] = new String[6];
    String fuelChoices[] = new String[4];
 
-   ResourceBundle wineResources;
+   ResourceBundle carResources;
 
    Environment clips;
    
    boolean isExecuting = false;
    Thread executionThread;
 
-
-
 class WeightCellRenderer extends JProgressBar implements TableCellRenderer 
      {
-      public WeightCellRenderer() 
+      /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public WeightCellRenderer() 
         {
          super(JProgressBar.HORIZONTAL,0,100);
          setStringPainted(false);
@@ -104,13 +107,13 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
      }
       
    /************/
-   /* WineDemo */
+   /* CARDemo */
    /************/
-   WineDemo()
+   CarDemo()
      {  
       try
         {
-         wineResources = ResourceBundle.getBundle("resources.WineResources",Locale.getDefault());
+         carResources = ResourceBundle.getBundle("resources.CarResources",Locale.getDefault());
         }
       catch (MissingResourceException mre)
         {
@@ -118,48 +121,48 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
          return;
         }
 
-      preferredTypeChoices[0] = wineResources.getString("Don'tCare"); 
-      preferredTypeChoices[1] = wineResources.getString("Hatcback"); 
-      preferredTypeChoices[2] = wineResources.getString("USF"); 
+      preferredTypeChoices[0] = carResources.getString("Don'tCare"); 
+      preferredTypeChoices[1] = carResources.getString("Hatcback"); 
+      preferredTypeChoices[2] = carResources.getString("USF"); 
       
-      preferredRoadChoices[0] = wineResources.getString("Don'tCare"); 
-      preferredRoadChoices[1] = wineResources.getString("OFFROAD"); 
-      preferredRoadChoices[2] = wineResources.getString("HIGHWAY"); 
-      preferredRoadChoices[3] = wineResources.getString("TRACK"); 
+      preferredRoadChoices[0] = carResources.getString("Don'tCare"); 
+      preferredRoadChoices[1] = carResources.getString("OFFROAD"); 
+      preferredRoadChoices[2] = carResources.getString("HIGHWAY"); 
+      preferredRoadChoices[3] = carResources.getString("TRACK"); 
 
-      preferredDriveChoices[0] = wineResources.getString("Don'tCare"); 
-      preferredDriveChoices[1] = wineResources.getString("4wd"); 
-      preferredDriveChoices[2] = wineResources.getString("rwd"); 
-      preferredDriveChoices[3] = wineResources.getString("fwd"); 
+      preferredDriveChoices[0] = carResources.getString("Don'tCare"); 
+      preferredDriveChoices[1] = carResources.getString("4wd"); 
+      preferredDriveChoices[2] = carResources.getString("rwd"); 
+      preferredDriveChoices[3] = carResources.getString("fwd"); 
       
-      mainMarkChoices[0] = wineResources.getString("Don'tKnow"); 
-      mainMarkChoices[1] = wineResources.getString("MERSEDES"); 
-      mainMarkChoices[2] = wineResources.getString("MANSORY"); 
-      mainMarkChoices[3] = wineResources.getString("BMW"); 
-      mainMarkChoices[4] = wineResources.getString("WALKSWAGEN"); 
-      mainMarkChoices[6] = wineResources.getString("WALKSWAGEN");
-      mainMarkChoices[7] = wineResources.getString("WALKSWAGEN");
-      mainMarkChoices[8] = wineResources.getString("WALKSWAGEN");
-      mainMarkChoices[5] = wineResources.getString("Other"); 
+      mainMarkChoices[0] = carResources.getString("Don'tKnow"); 
+      mainMarkChoices[1] = carResources.getString("WALKSWAGEN"); 
+      mainMarkChoices[2] = carResources.getString("BUGATTI"); 
+      mainMarkChoices[3] = carResources.getString("AUDI"); 
+      mainMarkChoices[4] = carResources.getString("MANSORY"); 
+      mainMarkChoices[5] = carResources.getString("MERSEDES");
+      mainMarkChoices[6] = carResources.getString("POSEIDON");
+      mainMarkChoices[7] = carResources.getString("BMW");
+      mainMarkChoices[8] = carResources.getString("Other"); 
       
-      tuningChoices[0] = wineResources.getString("Don'tKnow"); 
-      tuningChoices[1] = wineResources.getString("None"); 
-      tuningChoices[2] = wineResources.getString("BRABUS"); 
-      tuningChoices[3] = wineResources.getString("AMG"); 
-      tuningChoices[4] = wineResources.getString("GARAGE"); 
-      tuningChoices[5] = wineResources.getString("Other"); 
+      tuningChoices[0] = carResources.getString("Don'tKnow"); 
+      tuningChoices[1] = carResources.getString("None"); 
+      tuningChoices[2] = carResources.getString("BRABUS"); 
+      tuningChoices[3] = carResources.getString("AMG"); 
+      tuningChoices[4] = carResources.getString("GARAGE"); 
+      tuningChoices[5] = carResources.getString("Other"); 
 
-      fuelChoices[0] = wineResources.getString("Don'tKnow"); 
-      fuelChoices[1] = wineResources.getString("GAS"); 
-      fuelChoices[2] = wineResources.getString("BENZINE"); 
-      fuelChoices[3] = wineResources.getString("DIZEL"); 
+      fuelChoices[0] = carResources.getString("Don'tKnow"); 
+      fuelChoices[1] = carResources.getString("GAS"); 
+      fuelChoices[2] = carResources.getString("BENZINE"); 
+      fuelChoices[3] = carResources.getString("DIZEL"); 
 
       /*===================================*/
       /* Create a new JFrame container and */
       /* assign a layout manager to it.    */
       /*===================================*/
      
-      jfrm = new JFrame(wineResources.getString("WineDemo"));          
+      jfrm = new JFrame(carResources.getString("CarDemo"));          
       jfrm.getContentPane().setLayout(new BoxLayout(jfrm.getContentPane(),BoxLayout.Y_AXIS));
     
       /*=================================*/
@@ -182,50 +185,50 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
       GridLayout theLayout = new GridLayout(3,2);
       preferencesPanel.setLayout(theLayout);   
       preferencesPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
-                                                                 wineResources.getString("PreferencesTitle"),
+                                                                 carResources.getString("PreferencesTitle"),
                                                                  TitledBorder.CENTER,
                                                                  TitledBorder.ABOVE_TOP));
  
-      preferencesPanel.add(new JLabel(wineResources.getString("TypeLabel")));
+      preferencesPanel.add(new JLabel(carResources.getString("TypeLabel")));
       preferredType = new JComboBox(preferredTypeChoices); 
       preferencesPanel.add(preferredType);
       preferredType.addActionListener(this);
      
-      preferencesPanel.add(new JLabel(wineResources.getString("RoadLabel")));
+      preferencesPanel.add(new JLabel(carResources.getString("RoadLabel")));
       preferredRoad = new JComboBox(preferredRoadChoices); 
       preferencesPanel.add(preferredRoad);
       preferredRoad.addActionListener(this);
 
-      preferencesPanel.add(new JLabel(wineResources.getString("DriveLabel")));
+      preferencesPanel.add(new JLabel(carResources.getString("DriveLabel")));
       preferredDrive = new JComboBox(preferredDriveChoices); 
       preferencesPanel.add(preferredDrive);
       preferredDrive.addActionListener(this);
 
       /*========================*/
-      /* Create the meal panel. */
+      /* Create the mark panel. */
       /*========================*/
      
-      JPanel mealPanel = new JPanel(); 
+      JPanel markPanel = new JPanel(); 
       theLayout = new GridLayout(3,2);
-      mealPanel.setLayout(theLayout);   
-      mealPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
-                                                                 wineResources.getString("CarTitle"),
+      markPanel.setLayout(theLayout);   
+      markPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+                                                                 carResources.getString("CarTitle"),
                                                                  TitledBorder.CENTER,
                                                                  TitledBorder.ABOVE_TOP));
  
-      mealPanel.add(new JLabel(wineResources.getString("MainMarkLabel")));
+      markPanel.add(new JLabel(carResources.getString("MainMarkLabel")));
       mainMark = new JComboBox(mainMarkChoices); 
-      mealPanel.add(mainMark);
+      markPanel.add(mainMark);
       mainMark.addActionListener(this);
     
-      mealPanel.add(new JLabel(wineResources.getString("TuningLabel")));
+      markPanel.add(new JLabel(carResources.getString("TuningLabel")));
       tuning = new JComboBox(tuningChoices); 
-      mealPanel.add(tuning);
+      markPanel.add(tuning);
       tuning.addActionListener(this);
 
-      mealPanel.add(new JLabel(wineResources.getString("FuelLabel")));
+      markPanel.add(new JLabel(carResources.getString("FuelLabel")));
       fuel = new JComboBox(fuelChoices); 
-      mealPanel.add(fuel);
+      markPanel.add(fuel);
       fuel.addActionListener(this);
       
       /*==============================================*/
@@ -236,7 +239,7 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
       JPanel choicesPanel = new JPanel(); 
       choicesPanel.setLayout(new FlowLayout());
       choicesPanel.add(preferencesPanel);
-      choicesPanel.add(mealPanel);
+      choicesPanel.add(markPanel);
       
       jfrm.getContentPane().add(choicesPanel); 
  
@@ -247,8 +250,8 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
       carList = new DefaultTableModel();
 
       carList.setDataVector(new Object[][] { },
-                             new Object[] { wineResources.getString("CarTitle"), 
-                                            wineResources.getString("RecommendationTitle")});
+                             new Object[] { carResources.getString("CarTitle"), 
+                                            carResources.getString("RecommendationTitle")});
          
       JTable table = 
          new JTable(carList)
@@ -291,7 +294,7 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
       
       clips = new Environment();
       
-      clips.load("winedemo.clp");
+      clips.load("cardemo.clp");
       
       try
         { runCar(); }
@@ -325,7 +328,7 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
      }
      
    /***********/
-   /* runWine */
+   /* runcar */
    /***********/  
    private void runCar() throws Exception
      { 
@@ -337,19 +340,19 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
             
       item = preferredTypeChoices[preferredType.getSelectedIndex()];
       
-      if (item.equals("hatcback"))   
+      if (item.equals("Hatchback"))   
         { clips.assertString("(attribute (name  preferred-type) (value hatcback))"); }
-      else if (item.equals("usf"))   
+      else if (item.equals("USF"))   
         { clips.assertString("(attribute (name  preferred-type) (value usf))"); }
       else
         { clips.assertString("(attribute (name  preferred-type) (value unknown))"); }
 
       item = preferredRoadChoices[preferredRoad.getSelectedIndex()];
-      if (item.equals("offroad"))   
+      if (item.equals("OFFROAD"))   
         { clips.assertString("(attribute (name preferred-road) (value offroad))"); }
-      else if (item.equals("highway"))   
+      else if (item.equals("HIGHWAY"))   
         { clips.assertString("(attribute (name preferred-road) (value highway))"); }
-      else if (item.equals("track"))   
+      else if (item.equals("TRACK"))   
         { clips.assertString("(attribute (name preferred-road) (value track))"); }
       else
         { clips.assertString("(attribute (name preferred-road) (value unknown))"); }
@@ -365,9 +368,9 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
         { clips.assertString("(attribute (name preferred-drive) (value unknown))"); }
 
       item = mainMarkChoices[mainMark.getSelectedIndex()];
-      if (item.equals("MERSEDES") ||
-          item.equals("BMW") ||
-          item.equals("WALKSWAGEN"))
+      if (item.equals("WALKSWAGEN") ||
+          item.equals("BUGATTI") ||
+          item.equals("AUDI"))
         { 
          clips.assertString("(attribute (name main-mark) (value walkswagen))"); 
          clips.assertString("(attribute (name has-mansory) (value no))");
@@ -377,8 +380,8 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
          clips.assertString("(attribute (name main-mark) (value mersedes))"); 
          clips.assertString("(attribute (name has-mansory) (value yes))");
         }
-      else if (item.equals("hatchback") ||
-               item.equals("usf"))   
+      else if (item.equals("MERSEDES") ||
+               item.equals("POSEIDON"))   
         { 
          clips.assertString("(attribute (name main-mark) (value mersedes))"); 
          clips.assertString("(attribute (name has-mansory) (value no))");
@@ -402,20 +405,20 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
       item = tuningChoices[tuning.getSelectedIndex()];
       if (item.equals("None"))   
         { clips.assertString("(attribute (name has-tuning) (value no))"); }
-      else if (item.equals("BRABUS"))   
+      else if (item.equals("AMG"))   
         { 
          clips.assertString("(attribute (name has-tuning) (value yes))");
-         clips.assertString("(attribute (name tuning) (value brabus))");
+         clips.assertString("(attribute (name tuning) (value amg))");
         }
       else if (item.equals("GARAGE"))   
         { 
          clips.assertString("(attribute (name has-tuning) (value yes))");
          clips.assertString("(attribute (name tuning) (value garage))");
         }
-      else if (item.equals("AMG"))   
+      else if (item.equals("BRABUS"))   
         { 
          clips.assertString("(attribute (name has-tuning) (value yes))");
-         clips.assertString("(attribute (name tuning) (value AMG))");
+         clips.assertString("(attribute (name tuning) (value brabus))");
         }
       else if (item.equals("Other"))   
         { 
@@ -430,11 +433,11 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
 
       item = fuelNames[fuel.getSelectedIndex()];
       if (item.equals("GAS"))   
-        { clips.assertString("(attribute (name tastiness) (value gas))"); }
+        { clips.assertString("(attribute (name fuel) (value gas))"); }
       else if (item.equals("BENZINE"))   
-        { clips.assertString("(attribute (name tastiness) (value benzine))"); }
+        { clips.assertString("(attribute (name fuel) (value benzine))"); }
       else if (item.equals("DIZEL"))   
-        { clips.assertString("(attribute (name tastiness) (value dizel))"); }
+        { clips.assertString("(attribute (name fuel) (value dizel))"); }
       else
         { clips.assertString("(attribute (name tastiness) (value unknown))"); }
       
@@ -467,7 +470,7 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
      }
      
    /***************/
-   /* updateWines */
+   /* updatecars */
    /***************/  
    private void updateCars() throws Exception
      { 
@@ -507,7 +510,7 @@ class WeightCellRenderer extends JProgressBar implements TableCellRenderer
       SwingUtilities.invokeLater(
         new Runnable() 
           {  
-           public void run() { new WineDemo(); }  
+           public void run() { new CarDemo(); }  
           });   
      }  
   }
